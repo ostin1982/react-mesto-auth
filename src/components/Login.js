@@ -19,8 +19,8 @@ const Login = ({ handleLogin }) => {
     return (
         <form className="register" onSubmit={handleSubmit}>
             <h2 className="register__title">Вход</h2>
-            <input className="register__input" id="email" name="email" type="text" placeholder="Email" minLength="6" required onChange={handleChange} />
-            <input className="register__input" id="password" name="password" type="password" placeholder="Пароль" minLength="6" required onChange={handleChange} />
+            <input className="register__input" id="email" name="email" type="text" placeholder="Email" minLength="6" required value={data.email} onChange={handleChange} />
+            <input className="register__input" id="password" name="password" type="password" placeholder="Пароль" minLength="6" value={data.password} required onChange={handleChange} />
             <button className="register__submit" type="submit">Войти</button>          
         </form>
     )

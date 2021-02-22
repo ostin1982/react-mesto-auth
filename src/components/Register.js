@@ -21,10 +21,10 @@ const Register = ({ handleRegister }) => {
     return (
         <form className="register" onSubmit={handleSubmit}>
             <h2 className="register__title">Регистрация</h2>
-            <input className="register__input" name="email" type="email" placeholder="Email" minLength="6" maxLength="20" required onChange={handleChange}  />
-            <input className="register__input" name="password" type="password" placeholder="Пароль" minLength="6" maxLength="20" required onChange={handleChange}  />
+            <input className="register__input" name="email" type="email" placeholder="Email" minLength="6" maxLength="20" required value={data.email} onChange={handleChange}  />
+            <input className="register__input" name="password" type="password" placeholder="Пароль" minLength="6" maxLength="20" required value={data.password} onChange={handleChange}  />
             <button className="register__submit" type="submit">Зарегестрироваться</button>
-            <p className="register__link">Уже зарегестрированы? <Link className="register__link register__link_hover" to="/signin">Войти</Link></p>
+            <p className="register__link">Уже зарегестрированы? <Link className="register__link register__link_hover" to="/sign-in">Войти</Link></p>
         </form>
     );
 }

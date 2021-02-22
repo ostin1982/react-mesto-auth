@@ -17,7 +17,7 @@ const Header = ({ email, loggedOut }) => {
           <Route exact path='/'>
               <div className='header__info'>
                   <p className='header__link header__link_nothover'>{email}</p>
-                  <Link className='header__link header__link_weight' onClick={loggedOut}>Выйти</Link>
+                  <Link className='header__link header__link_weight' onClick={loggedOut} to='/sign-in'>Выйти</Link>
               </div>
           </Route>
         </nav>

@@ -13,7 +13,7 @@ import Register from "./Register";
 import Login from "./Login";
 import ProtectedRoute from './ProtectedRoute';
 import InfoTooltip from './InfoTooltip';
-import * as utils from '../utils/utils';
+import * as auth from '../utils/auth';
 
 
 import { api } from "../utils/api";
@@ -127,7 +127,7 @@ const App = () => {
   }
 
   const handleRegister = ({email, password}) => {  
-    return utils.register({email, password})
+    return auth.register({email, password})
     .then(res => {
       if (res) {
         setIsInfoTooltipOpen(true);
@@ -142,7 +142,7 @@ const App = () => {
   }
   
   const handleLogin = ({email, password}) => {
-    return utils.login({email, password})
+    return auth.login({email, password})
     .then(res => {
       if (res.token)  {
         localStorage.setItem('jwt', res.token);
@@ -158,8 +158,7 @@ const App = () => {
         history.push('/')
       }
     })
-    .catch(err => {
-      console.log(err)
+    .catch(() => {
       setIsInfoTooltipOpen(true)
       setIsInfoTooltipStatus(false)
     })
@@ -175,10 +174,12 @@ const App = () => {
   const tokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
-      utils.getContent(jwt)
+      auth.getContent(jwt)
         .then((res) => {
           if (res) {
             setLoggedIn(true);
+            //добавил строку ниже, теперь при перезагрузке страницы остается на месте, но ругается eslint
+            history.push('/');
             setEmail(res.data.email);
           }
         })
@@ -202,7 +203,7 @@ const App = () => {
 
       <Switch>
           <ProtectedRoute
-          exact path="/"
+          exact path='/'
           loggedIn={loggedIn}
           component={Main}
           cards={cards}
@@ -215,14 +216,14 @@ const App = () => {
           closeAllPopups={closeAllPopups}
         />
 
-        <Route path="/sign-in">
+        <Route path='/sign-in'>
           <Login handleLogin={handleLogin} setEmail={setEmail} />
         </Route>
-        <Route path="/sign-up">
+        <Route path='/sign-up'>
           <Register handleRegister={handleRegister} />
         </Route>
         <Route>
-          {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
+          {loggedIn ? <Redirect to='/' /> : <Redirect to='/sign-in' />}
         </Route>
       </Switch>
 
