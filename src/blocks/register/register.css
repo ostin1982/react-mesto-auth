@@ -1,0 +1,15 @@
+.register {
+    font-family: "Inter";
+    height: 572px;
+    max-width: 358px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    color: #ffffff;
+}
+
+@media screen and (max-width: 530px) {
+    .register {
+        width: 260px;
+    }
+}
